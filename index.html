@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Porto Zilla</title>
-    <link rel="icon" href="images/motion-mode-fill0.svg" type="image/svg+xml"/>
+    <link rel="icon" href="images/star-shine-fill0.svg" type="image/svg+xml"/>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"/>
@@ -14,27 +14,55 @@
   <body>
     <header>
       <div class="floating-header">
-        <div class="home">
-          <span><img src="images/motion-mode-fill0.svg" class="brand"/><p>Porto Zilla</p></span>
+        <div class="home" data-tooltip="Back to Home" data-idle-src="images/star-shine-fill0.svg" data-hover-src="images/star-shine-fill1.svg" tabindex="0">
+          <span><img src="images/star-shine-fill0.svg" alt="Icon Porto Zilla"/></span>
         </div>
-        <nav class="menu" aria-label="Portfolio menu">
-          <span class="menu-indicator" aria-hidden="true"><img src="images/video-template-fill0.svg" alt=""/></span>
-          <span>Demo Reel</span>
-          <span><img src="images/article-person-fill0.svg" alt=""/></span>
-          <span>Curriculum Vitae</span>
-          <span><img src="images/article-fill0.svg" alt=""/></span>
-          <span>Cover Letter</span>
-        </nav>
-        <div class="switch-theme">
-          <span class="dark-mode"><img src="images/dark-mode-fill0.svg"/></span>
-          <span class="light-mode"><img src="images/light-mode-fill0.svg"/></span>
+        <div class="menu" aria-label="Portfolio menu">
+          <span data-tooltip="Demo Reel" tabindex="0"><img src="images/video-template-fill0.svg" data-idle-src="images/video-template-fill0.svg" data-hover-src="images/video-template-fill1.svg" alt="Icon Demo Reel"/></span>
+          <span data-tooltip="Curriculum Vitae" tabindex="0"><img src="images/article-person-fill0.svg" data-idle-src="images/article-person-fill0.svg" data-hover-src="images/article-person-fill1.svg" alt="Icon Curriculum Vitae"/></span>
+          <span data-tooltip="Cover Letter" tabindex="0"><img src="images/article-fill0.svg" data-idle-src="images/article-fill0.svg" data-hover-src="images/article-fill1.svg" alt="Icon Cover Letter"/></span>
+        </div>
+        <div class="switch-theme" role="button" tabindex="0" aria-label="Ganti ke tema gelap" data-tooltip="Ganti Tema">
+          <div class="theme-icons">
+            <span class="gelap"><img src="images/dark-mode-fill0.svg" alt="Ganti Mode Gelap"/></span>
+            <span class="terang"><img src="images/light-mode-fill0.svg" alt="Ganti Mode Terang"/></span>
+          </div>
         </div>
       </div>
     </header>
     <main>
-      <div class="video-content"></div>
-      <div class="cv-content"></div>
-      <div class="cl-content"></div>
+      <div class="video-content">
+        <video src="videos/demo-reel.mp4" controls playsinline></video>
+      </div>
+      <div class="cv-content">
+        <div data-tooltip="Nama"><p>Roja Rafi Nur Muzilla</p></div>
+        <div data-tooltip="e-mail"><p>rojarafinurmuzilla@gmail.com</p></div>
+        <div data-tooltip="Nomor HP"><p>087731180268</p></div>
+        <div data-tooltip="Alamat"><p>Dsn. Randugembung 01/05, Ds. Randugenengan, Kec. Dlanggu, Kab. Mojokerto</p></div>
+        <div data-tooltip="Pendidikan Terakhir"><p>SMK Negeri 1 Dlanggu</p></div>
+        <div data-tooltip="Pengalaman Magang"><p>PT Mitra Cipta Informatika</p></div>
+        <div data-tooltip="Software">
+          <p>Sofware yang dikuasai</p>
+          <p>Maya</p>
+          <p>Blender</p>
+          <p>Photoshop</p>
+          <p>Illustrator</p>
+          <p>Canva</p>
+          <p>Figma</p>
+          <p>After Effect</p>
+          <p>HTML</p>
+          <p>CSS</p>
+          <p>Javascript</p>
+        </div>
+      </div>
+      <div class="cl-content">
+        <p>Yth. HRD / Art Director [Nama Studio Animasi],</p>
+        <p>Melalui surat ini, saya bermaksud melamar posisi **Junior 3D Animator** di [Nama Studio] yang informasinya saya dapatkan dari [Sumber Informasi].</p>
+        <p>Saya telah lama mengikuti karya-karya dari [Nama Studio], khususnya pada IP animasi [Sebutkan Judulnya]. Kualitas pergerakan dan *storytelling* visual dari studio ini sangat menginspirasi saya untuk bisa ikut berkontribusi.</p>
+        <p>Saya adalah lulusan SMK Animasi tahun [Tahun]. Selama masa studi, saya menyelesaikan program magang di [Nama Studio Magang] sebagai 3D Animator Intern, di mana saya terbiasa memenuhi kuota detik animasi per minggu dan beradaptasi dengan *pipeline* produksi.</p>
+        <p>Saya lampirkan tautan menuju Portofolio dan Resume saya untuk Bapak/Ibu tinjau: **[Link Website/Showreel Kamu]**.</p>
+        <p>Saya sangat bersedia untuk mengikuti tahap *Art Test* (Tes Animasi) jika diperlukan. Terima kasih atas waktu dan kesempatan yang diberikan.</p>
+      </div>
     </main>
     <footer>
       <div class="floating-footer">
