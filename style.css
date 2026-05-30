@@ -25,12 +25,13 @@ body {
 .floating-header {
   position: fixed;
   top: 0;
+  left: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
   margin: 8px auto;
   gap: 4px;
+  transform: translateX(-50%);
 }
 
 .home {
@@ -149,17 +150,29 @@ body {
   transform: translate(-50%, 0);
 }
 
+.floating-footer [data-tooltip]::after {
+  top: auto;
+  bottom: calc(100% + 8px);
+  transform: translate(-50%, 4px);
+}
+
+.floating-footer [data-tooltip]:hover::after,
+.floating-footer [data-tooltip]:focus-visible::after {
+  transform: translate(-50%, 0);
+}
+
 .floating-footer {
   position: fixed;
-  left: 50%;
-  bottom: 16px;
-  transform: translateX(-50%);
+  bottom: 8px;
+  left: 0;
+  right: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
   padding: 6px 24px;
   width: fit-content;
+  margin-inline: auto;
   background-color: tomato;
   border-radius: 32px;
 }
