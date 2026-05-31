@@ -1,78 +1,196 @@
 <!doctype html>
+<!-- Menentukan dokumen ini memakai standar HTML5. -->
+<!-- Elemen root halaman; lang="id" memberi tahu browser dan screen reader bahwa bahasa utama adalah Indonesia. -->
 <html lang="id">
+  <!-- Bagian head berisi metadata, judul, font, icon, dan file CSS; isinya tidak tampil langsung sebagai konten halaman. -->
   <head>
+    <!-- Mengatur encoding karakter agar teks terbaca benar di browser. -->
     <meta charset="UTF-8"/>
+    <!-- Membuat layout responsif mengikuti lebar layar perangkat. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Judul yang muncul di tab browser. -->
     <title>Porto Zilla</title>
+    <!-- Icon kecil di tab browser, diambil dari folder images. -->
     <link rel="icon" href="images/star-shine-fill0.svg" type="image/svg+xml"/>
+    <!-- Preconnect mempercepat koneksi awal ke server Google Fonts. -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <!-- Preconnect ke domain file font Google; crossorigin dibutuhkan karena font diambil lintas domain. -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <!-- Mengambil font Roboto dari Google Fonts. -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"/>
+    <!-- Menghubungkan file CSS utama untuk mengatur tampilan halaman. -->
     <link rel="stylesheet" href="style.css"/>
   </head>
 
+  <!-- Body berisi semua konten yang terlihat dan bisa dipakai user. -->
   <body>
+    <!-- Header dipakai untuk area navigasi utama yang melayang di atas halaman. -->
     <header>
+      <!-- Floating header adalah wrapper menu fixed/sticky yang selalu terlihat saat scroll. -->
       <div class="floating-header">
-        <div class="home" data-tooltip="Back to Home" data-idle-src="images/star-shine-fill0.svg" data-hover-src="images/star-shine-fill1.svg" tabindex="0">
+        <!-- Tombol home berupa link anchor yang mengarah ke bagian paling atas halaman. -->
+        <a class="home" href="#home" data-tooltip="Back to Home" data-idle-src="images/star-shine-fill0.svg" data-hover-src="images/star-shine-fill1.svg">
+          <!-- Span membantu menjaga ikon tetap mudah diatur dengan flexbox. -->
           <span><img src="images/star-shine-fill0.svg" alt="Icon Porto Zilla"/></span>
-        </div>
+        <!-- Menutup link home. -->
+        </a>
+        <!-- Menu utama berisi link ke tiga section portofolio. -->
         <div class="menu" aria-label="Portfolio menu">
-          <span data-tooltip="Demo Reel" tabindex="0"><img src="images/video-template-fill0.svg" data-idle-src="images/video-template-fill0.svg" data-hover-src="images/video-template-fill1.svg" alt="Icon Demo Reel"/></span>
-          <span data-tooltip="Curriculum Vitae" tabindex="0"><img src="images/article-person-fill0.svg" data-idle-src="images/article-person-fill0.svg" data-hover-src="images/article-person-fill1.svg" alt="Icon Curriculum Vitae"/></span>
-          <span data-tooltip="Cover Letter" tabindex="0"><img src="images/article-fill0.svg" data-idle-src="images/article-fill0.svg" data-hover-src="images/article-fill1.svg" alt="Icon Cover Letter"/></span>
+          <!-- Link menuju section demo reel; tooltip memberi label saat hover/fokus. -->
+          <a href="#demo-reel" data-tooltip="Demo Reel"><img src="images/video-template-fill0.svg" data-idle-src="images/video-template-fill0.svg" data-hover-src="images/video-template-fill1.svg" alt="Icon Demo Reel"/></a>
+          <!-- Link menuju section curriculum vitae. -->
+          <a href="#curriculum-vitae" data-tooltip="Curriculum Vitae"><img src="images/article-person-fill0.svg" data-idle-src="images/article-person-fill0.svg" data-hover-src="images/article-person-fill1.svg" alt="Icon Curriculum Vitae"/></a>
+          <!-- Link menuju section cover letter. -->
+          <a href="#cover-letter" data-tooltip="Cover Letter"><img src="images/article-fill0.svg" data-idle-src="images/article-fill0.svg" data-hover-src="images/article-fill1.svg" alt="Icon Cover Letter"/></a>
+        <!-- Menutup wrapper menu. -->
         </div>
+        <!-- Tombol untuk mengganti tema; role button dan tabindex membuat div ini bisa dipakai seperti tombol. -->
         <div class="switch-theme" role="button" tabindex="0" aria-label="Ganti ke tema gelap" data-tooltip="Ganti Tema">
+          <!-- Wrapper ikon tema agar animasi gelap/terang bisa ditumpuk di area yang sama. -->
           <div class="theme-icons">
+            <!-- Ikon mode gelap, terlihat saat website belum dark mode. -->
             <span class="gelap"><img src="images/dark-mode-fill0.svg" alt="Ganti Mode Gelap"/></span>
+            <!-- Ikon mode terang, terlihat setelah website dark mode. -->
             <span class="terang"><img src="images/light-mode-fill0.svg" alt="Ganti Mode Terang"/></span>
+          <!-- Menutup wrapper ikon tema. -->
           </div>
+        <!-- Menutup tombol switch theme. -->
         </div>
+      <!-- Menutup floating header. -->
       </div>
+    <!-- Menutup header. -->
     </header>
+    <!-- Main adalah area konten utama halaman. -->
     <main>
-      <div class="video-content">
+      <!-- Section demo reel; id home menjadi target tombol home. -->
+      <div class="video-content" id="home">
+        <!-- Anchor tersembunyi untuk target menu Demo Reel tanpa mengganggu layout video. -->
+        <span id="demo-reel" aria-hidden="true"></span>
+        <!-- Elemen video menampilkan file demo reel dengan kontrol bawaan browser. -->
         <video src="videos/demo-reel.mp4" controls playsinline></video>
+      <!-- Menutup section video. -->
       </div>
-      <div class="cv-content">
-        <div data-tooltip="Nama"><p>Roja Rafi Nur Muzilla</p></div>
-        <div data-tooltip="e-mail"><p>rojarafinurmuzilla@gmail.com</p></div>
-        <div data-tooltip="Nomor HP"><p>087731180268</p></div>
-        <div data-tooltip="Alamat"><p>Dsn. Randugembung 01/05, Ds. Randugenengan, Kec. Dlanggu, Kab. Mojokerto</p></div>
-        <div data-tooltip="Pendidikan Terakhir"><p>SMK Negeri 1 Dlanggu</p></div>
-        <div data-tooltip="Pengalaman Magang"><p>PT Mitra Cipta Informatika</p></div>
-        <div data-tooltip="Software">
-          <p>Sofware yang dikuasai</p>
-          <p>Maya</p>
-          <p>Blender</p>
-          <p>Photoshop</p>
-          <p>Illustrator</p>
-          <p>Canva</p>
-          <p>Figma</p>
-          <p>After Effect</p>
-          <p>HTML</p>
-          <p>CSS</p>
-          <p>Javascript</p>
+      <!-- Section CV; id dipakai sebagai target link menu Curriculum Vitae. -->
+      <div class="cv-content" id="curriculum-vitae">
+        <!-- Kartu profil utama di Bento Grid. -->
+        <div class="cv-card cv-card-profile" data-tooltip="Nama">
+          <!-- Ikon profil; data-idle-src dan data-hover-src dipakai JavaScript untuk efek hover. -->
+          <img src="images/person-2-fill0.svg" data-idle-src="images/person-2-fill0.svg" data-hover-src="images/person-2-fill1.svg" alt="Gambar Profil"/>
+          <!-- Nama pemilik portofolio. -->
+          <p>Roja Rafi Nur Muzilla</p>
+        <!-- Menutup kartu profil. -->
         </div>
+        <!-- Kartu email. -->
+        <div class="cv-card" data-tooltip="e-mail">
+          <!-- Ikon email dengan data gambar untuk hover. -->
+          <img src="images/mail-fill0.svg" data-idle-src="images/mail-fill0.svg" data-hover-src="images/mail-fill1.svg" alt="Gambar e-mail"/>
+          <!-- Alamat email. -->
+          <p>rojarafinurmuzilla@gmail.com</p>
+        <!-- Menutup kartu email. -->
+        </div>
+        <!-- Kartu nomor handphone. -->
+        <div class="cv-card" data-tooltip="Nomor HP">
+          <!-- Ikon telepon dengan data gambar untuk hover. -->
+          <img src="images/call-fill0.svg" data-idle-src="images/call-fill0.svg" data-hover-src="images/call-fill1.svg" alt="Gambar Nomor HP"/>
+          <!-- Nomor handphone. -->
+          <p>087731180268</p>
+        <!-- Menutup kartu nomor handphone. -->
+        </div>
+        <!-- Kartu alamat dibuat lebih lebar lewat class cv-card-address. -->
+        <div class="cv-card cv-card-address" data-tooltip="Alamat">
+          <!-- Ikon alamat/rumah dengan data gambar untuk hover. -->
+          <img src="images/home-and-garden-fill0.svg" data-idle-src="images/home-and-garden-fill0.svg" data-hover-src="images/home-and-garden-fill1.svg" alt="Gambar Alamat"/>
+          <!-- Alamat lengkap. -->
+          <p>Dsn. Randugembung 01/05, Ds. Randugenengan, Kec. Dlanggu, Kab. Mojokerto</p>
+        <!-- Menutup kartu alamat. -->
+        </div>
+        <!-- Kartu pendidikan terakhir. -->
+        <div class="cv-card" data-tooltip="Pendidikan Terakhir">
+          <!-- Ikon sekolah dengan data gambar untuk hover. -->
+          <img src="images/school-fill0.svg" data-idle-src="images/school-fill0.svg" data-hover-src="images/school-fill1.svg" alt="Gambar Sekolah"/>
+          <!-- Nama sekolah. -->
+          <p>SMK Negeri 1 Dlanggu</p>
+        <!-- Menutup kartu pendidikan. -->
+        </div>
+        <!-- Kartu pengalaman magang. -->
+        <div class="cv-card" data-tooltip="Pengalaman Magang">
+          <!-- Ikon riwayat kerja dengan data gambar untuk hover. -->
+          <img src="images/work-history-fill0.svg" data-idle-src="images/work-history-fill0.svg" data-hover-src="images/work-history-fill1.svg" alt="Gambar Magang"/>
+          <!-- Nama tempat magang. -->
+          <p>PT Mitra Cipta Informatika</p>
+        <!-- Menutup kartu pengalaman magang. -->
+        </div>
+        <!-- Kartu software dibuat selebar grid agar daftar skill lebih lega. -->
+        <div class="cv-card cv-card-software" data-tooltip="Software">
+          <!-- Judul kecil untuk daftar software. -->
+          <p>Software yang dikuasai</p>
+          <!-- Wrapper daftar software agar setiap item bisa tampil sebagai chip. -->
+          <div class="software-list">
+            <!-- Item software 3D. -->
+            <span>Maya</span>
+            <!-- Item software 3D. -->
+            <span>Blender</span>
+            <!-- Item software desain. -->
+            <span>Photoshop</span>
+            <!-- Item software desain vektor. -->
+            <span>Illustrator</span>
+            <!-- Item software desain cepat. -->
+            <span>Canva</span>
+            <!-- Item software desain UI. -->
+            <span>Figma</span>
+            <!-- Item software motion/kompositing. -->
+            <span>After Effect</span>
+            <!-- Skill markup web. -->
+            <span>HTML</span>
+            <!-- Skill styling web. -->
+            <span>CSS</span>
+            <!-- Skill interaksi web. -->
+            <span>Javascript</span>
+          <!-- Menutup daftar software. -->
+          </div>
+        <!-- Menutup kartu software. -->
+        </div>
+      <!-- Menutup section CV. -->
       </div>
-      <div class="cl-content">
+      <!-- Section cover letter; id dipakai sebagai target link menu Cover Letter. -->
+      <div class="cl-content" id="cover-letter">
+        <!-- Baris pembuka surat lamaran. -->
         <p>Yth. HRD / Art Director [Nama Studio Animasi],</p>
-        <p>Melalui surat ini, saya bermaksud melamar posisi **Junior 3D Animator** di [Nama Studio] yang informasinya saya dapatkan dari [Sumber Informasi].</p>
-        <p>Saya telah lama mengikuti karya-karya dari [Nama Studio], khususnya pada IP animasi [Sebutkan Judulnya]. Kualitas pergerakan dan *storytelling* visual dari studio ini sangat menginspirasi saya untuk bisa ikut berkontribusi.</p>
-        <p>Saya adalah lulusan SMK Animasi tahun [Tahun]. Selama masa studi, saya menyelesaikan program magang di [Nama Studio Magang] sebagai 3D Animator Intern, di mana saya terbiasa memenuhi kuota detik animasi per minggu dan beradaptasi dengan *pipeline* produksi.</p>
-        <p>Saya lampirkan tautan menuju Portofolio dan Resume saya untuk Bapak/Ibu tinjau: **[Link Website/Showreel Kamu]**.</p>
-        <p>Saya sangat bersedia untuk mengikuti tahap *Art Test* (Tes Animasi) jika diperlukan. Terima kasih atas waktu dan kesempatan yang diberikan.</p>
+        <!-- Paragraf maksud melamar pekerjaan. -->
+        <p>Melalui surat ini, saya bermaksud melamar posisi Junior 3D Animator di [Nama Studio] yang informasinya saya dapatkan dari [Sumber Informasi].</p>
+        <!-- Paragraf yang menunjukkan ketertarikan pada studio tujuan. -->
+        <p>Saya telah lama mengikuti karya-karya dari [Nama Studio], khususnya pada IP animasi [Sebutkan Judulnya]. Kualitas pergerakan dan storytelling visual dari studio ini sangat menginspirasi saya untuk bisa ikut berkontribusi.</p>
+        <!-- Paragraf ringkasan latar pendidikan dan pengalaman magang. -->
+        <p>Saya adalah lulusan SMK Animasi tahun [Tahun]. Selama masa studi, saya menyelesaikan program magang di [Nama Studio Magang] sebagai 3D Animator Intern, di mana saya terbiasa memenuhi kuota detik animasi per minggu dan beradaptasi dengan pipeline produksi.</p>
+        <!-- Paragraf lampiran portofolio dan resume. -->
+        <p>Saya lampirkan tautan menuju Portofolio dan Resume saya untuk Bapak/Ibu tinjau: [Link Website/Showreel Kamu].</p>
+        <!-- Paragraf penutup surat. -->
+        <p>Saya sangat bersedia untuk mengikuti tahap Anim Test (Tes Animasi) jika diperlukan. Terima kasih atas waktu dan kesempatan yang diberikan.</p>
+      <!-- Menutup section cover letter. -->
       </div>
+    <!-- Menutup konten utama. -->
     </main>
+    <!-- Footer berisi link sosial media yang melayang di bawah halaman. -->
     <footer>
+      <!-- Floating footer adalah wrapper ikon sosial media. -->
       <div class="floating-footer">
-        <span class="socials-btn" data-tooltip="Instagram"><img src="images/instagram-brands.svg"/></span>
-        <span class="socials-btn" data-tooltip="Youtube"><img src="images/youtube-brands.svg"/></span>
-        <span class="socials-btn" data-tooltip="Facebook"><img src="images/facebook-brands.svg"/></span>
-        <span class="socials-btn" data-tooltip="TikTok"><img src="images/tiktok-brands.svg"/></span>
-        <span class="socials-btn" data-tooltip="X"><img src="images/x-twitter-brands.svg"/></span>
+        <!-- Link Instagram; href masih kosong agar bisa diisi nanti, target blank membuka tab baru. -->
+        <a class="socials-btn" href="" target="_blank" rel="noopener noreferrer" data-tooltip="Instagram" aria-label="Instagram"><img src="images/instagram-brands.svg" alt="Instagram"/></a>
+        <!-- Link Youtube; rel noopener noreferrer menjaga keamanan saat membuka tab baru. -->
+        <a class="socials-btn" href="" target="_blank" rel="noopener noreferrer" data-tooltip="Youtube" aria-label="Youtube"><img src="images/youtube-brands.svg" alt="Youtube"/></a>
+        <!-- Link Facebook dengan tooltip dan aria-label. -->
+        <a class="socials-btn" href="" target="_blank" rel="noopener noreferrer" data-tooltip="Facebook" aria-label="Facebook"><img src="images/facebook-brands.svg" alt="Facebook"/></a>
+        <!-- Link TikTok dengan URL placeholder kosong. -->
+        <a class="socials-btn" href="" target="_blank" rel="noopener noreferrer" data-tooltip="TikTok" aria-label="TikTok"><img src="images/tiktok-brands.svg" alt="TikTok"/></a>
+        <!-- Link X dengan URL placeholder kosong. -->
+        <a class="socials-btn" href="" target="_blank" rel="noopener noreferrer" data-tooltip="X" aria-label="X"><img src="images/x-twitter-brands.svg" alt="X"/></a>
+      <!-- Menutup floating footer. -->
       </div>
+    <!-- Menutup footer. -->
     </footer>
+    <!-- Memuat JavaScript di akhir body agar HTML selesai dibaca sebelum script berjalan. -->
     <script src="script.js"></script>
+  <!-- Menutup body. -->
   </body>
+<!-- Menutup dokumen HTML. -->
 </html>
