@@ -20,22 +20,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"/>
     <!-- Menghubungkan file CSS utama untuk mengatur tampilan halaman. -->
     <link rel="stylesheet" href="style.css"/>
+    <!-- Memuat JavaScript dengan defer agar dieksekusi setelah HTML selesai diparse. -->
+    <script src="script.js" defer></script>
   </head>
 
   <!-- Body berisi semua konten yang terlihat dan bisa dipakai user. -->
-  <body>
+  <body data-theme="classic" data-mode="light">
     <!-- Header dipakai untuk area navigasi utama yang melayang di atas halaman. -->
     <header>
       <!-- Floating header adalah wrapper menu fixed/sticky yang selalu terlihat saat scroll. -->
       <div class="floating-header">
         <!-- Tombol home berupa link anchor yang mengarah ke bagian paling atas halaman. -->
         <a class="home" href="#home" data-tooltip="Back to Home" data-idle-src="images/star-shine-fill0.svg" data-hover-src="images/star-shine-fill1.svg">
-          <!-- Span membantu menjaga ikon tetap mudah diatur dengan flexbox. -->
-          <span><img src="images/star-shine-fill0.svg" alt="Icon Porto Zilla"/></span>
+          <img src="images/star-shine-fill0.svg" alt="Icon Porto Zilla"/>
         <!-- Menutup link home. -->
         </a>
         <!-- Menu utama berisi link ke tiga section portofolio. -->
-        <div class="menu" aria-label="Portfolio menu">
+        <nav class="menu" aria-label="Menu portofolio">
           <!-- Link menuju section demo reel; tooltip memberi label saat hover/fokus. -->
           <a href="#demo-reel" data-tooltip="Demo Reel"><img src="images/video-template-fill0.svg" data-idle-src="images/video-template-fill0.svg" data-hover-src="images/video-template-fill1.svg" alt="Icon Demo Reel"/></a>
           <!-- Link menuju section curriculum vitae. -->
@@ -43,18 +44,41 @@
           <!-- Link menuju section cover letter. -->
           <a href="#cover-letter" data-tooltip="Cover Letter"><img src="images/article-fill0.svg" data-idle-src="images/article-fill0.svg" data-hover-src="images/article-fill1.svg" alt="Icon Cover Letter"/></a>
         <!-- Menutup wrapper menu. -->
-        </div>
-        <!-- Tombol untuk mengganti tema; role button dan tabindex membuat div ini bisa dipakai seperti tombol. -->
-        <div class="switch-theme" role="button" tabindex="0" aria-label="Ganti ke tema gelap" data-tooltip="Ganti Tema">
-          <!-- Wrapper ikon tema agar animasi gelap/terang bisa ditumpuk di area yang sama. -->
-          <div class="theme-icons">
-            <!-- Ikon mode gelap, terlihat saat website belum dark mode. -->
-            <span class="gelap"><img src="images/dark-mode-fill0.svg" alt="Ganti Mode Gelap"/></span>
-            <!-- Ikon mode terang, terlihat setelah website dark mode. -->
-            <span class="terang"><img src="images/light-mode-fill0.svg" alt="Ganti Mode Terang"/></span>
-          <!-- Menutup wrapper ikon tema. -->
+        </nav>
+        <div class="header-actions">
+          <!-- Tombol untuk mengganti tema. -->
+          <button class="switch-theme" type="button" aria-label="Ganti ke tema gelap" data-tooltip="Ganti Tema">
+            <!-- Wrapper ikon tema agar animasi gelap/terang bisa ditumpuk di area yang sama. -->
+            <div class="theme-icons">
+              <!-- Ikon mode gelap, terlihat saat website belum dark mode. -->
+              <span class="gelap"><img src="images/dark-mode-fill0.svg" alt="Ganti Mode Gelap"/></span>
+              <!-- Ikon mode terang, terlihat setelah website dark mode. -->
+              <span class="terang"><img src="images/light-mode-fill0.svg" alt="Ganti Mode Terang"/></span>
+            <!-- Menutup wrapper ikon tema. -->
+            </div>
+          <!-- Menutup tombol switch theme. -->
+          </button>
+          <!-- Pilihan tema warna utama sebagai dropdown. -->
+          <div class="theme-picker" aria-label="Pilihan tema warna">
+            <button class="theme-picker-trigger" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-picker-panel" data-tooltip="Warna Tema">
+              <img src="images/palettefill0.svg" data-idle-src="images/palettefill0.svg" data-hover-src="images/palette-fill1.svg" alt="Buka menu tema"/>
+            </button>
+            <div class="theme-picker-panel" id="theme-picker-panel" role="menu" hidden>
+              <!-- Tombol tema classic. -->
+              <button class="theme-option theme-option-classic" type="button" role="menuitem" data-theme-option="classic" data-tooltip="Classic" aria-label="Pilih tema Classic" aria-pressed="true" data-idle-src="images/palettefill0.svg" data-hover-src="images/palette-fill1.svg">
+                <img src="images/palettefill0.svg" alt="Icon tema Classic"/>
+              </button>
+              <!-- Tombol tema moss. -->
+              <button class="theme-option theme-option-moss" type="button" role="menuitem" data-theme-option="moss" data-tooltip="Moss" aria-label="Pilih tema Moss" aria-pressed="false" data-idle-src="images/palettefill0.svg" data-hover-src="images/palette-fill1.svg">
+                <img src="images/palettefill0.svg" alt="Icon tema Moss"/>
+              </button>
+              <!-- Tombol tema coral. -->
+              <button class="theme-option theme-option-coral" type="button" role="menuitem" data-theme-option="coral" data-tooltip="Coral" aria-label="Pilih tema Coral" aria-pressed="false" data-idle-src="images/palettefill0.svg" data-hover-src="images/palette-fill1.svg">
+                <img src="images/palettefill0.svg" alt="Icon tema Coral"/>
+              </button>
+            </div>
+          <!-- Menutup pilihan tema warna. -->
           </div>
-        <!-- Menutup tombol switch theme. -->
         </div>
       <!-- Menutup floating header. -->
       </div>
@@ -63,15 +87,31 @@
     <!-- Main adalah area konten utama halaman. -->
     <main>
       <!-- Section demo reel; id home menjadi target tombol home. -->
-      <div class="video-content" id="home">
+      <section class="video-content" id="home">
         <!-- Anchor tersembunyi untuk target menu Demo Reel tanpa mengganggu layout video. -->
         <span id="demo-reel" aria-hidden="true"></span>
-        <!-- Elemen video menampilkan file demo reel dengan kontrol bawaan browser. -->
-        <video src="videos/demo-reel.mp4" controls playsinline></video>
+        <!-- Tombol pembuka modal demo reel. -->
+        <button class="video-open" type="button" aria-haspopup="dialog" aria-controls="demo-reel-modal">
+          <!-- Preview video tanpa kontrol; video penuh dibuka di modal. -->
+          <video src="videos/demo-reel.mp4" muted playsinline preload="metadata" aria-hidden="true"></video>
+          <span>Play Demo Reel</span>
+        </button>
       <!-- Menutup section video. -->
+      </section>
+      <!-- Modal demo reel; tersembunyi sampai tombol preview diklik. -->
+      <div class="video-modal" id="demo-reel-modal" role="dialog" aria-modal="true" aria-label="Demo Reel" hidden>
+        <!-- Backdrop modal juga bisa diklik untuk menutup video. -->
+        <button class="video-modal-backdrop" type="button" aria-label="Tutup Demo Reel"></button>
+        <!-- Panel video utama di atas backdrop. -->
+        <div class="video-modal-panel">
+          <!-- Tombol close modal. -->
+          <button class="video-modal-close" type="button" aria-label="Tutup Demo Reel">&times;</button>
+          <!-- Video demo reel dengan kontrol bawaan browser. -->
+          <video src="videos/demo-reel.mp4" controls playsinline></video>
+        </div>
       </div>
       <!-- Section CV; id dipakai sebagai target link menu Curriculum Vitae. -->
-      <div class="cv-content" id="curriculum-vitae">
+      <section class="cv-content" id="curriculum-vitae">
         <!-- Kartu profil utama di Bento Grid. -->
         <div class="cv-card cv-card-profile" data-tooltip="Nama">
           <!-- Ikon profil; data-idle-src dan data-hover-src dipakai JavaScript untuk efek hover. -->
@@ -125,35 +165,35 @@
           <!-- Judul kecil untuk daftar software. -->
           <p>Software yang dikuasai</p>
           <!-- Wrapper daftar software agar setiap item bisa tampil sebagai chip. -->
-          <div class="software-list">
+          <ul class="software-list" aria-label="Daftar software yang dikuasai">
             <!-- Item software 3D. -->
-            <span>Maya</span>
+            <li>Maya</li>
             <!-- Item software 3D. -->
-            <span>Blender</span>
+            <li>Blender</li>
             <!-- Item software desain. -->
-            <span>Photoshop</span>
+            <li>Photoshop</li>
             <!-- Item software desain vektor. -->
-            <span>Illustrator</span>
+            <li>Illustrator</li>
             <!-- Item software desain cepat. -->
-            <span>Canva</span>
+            <li>Canva</li>
             <!-- Item software desain UI. -->
-            <span>Figma</span>
+            <li>Figma</li>
             <!-- Item software motion/kompositing. -->
-            <span>After Effect</span>
+            <li>After Effect</li>
             <!-- Skill markup web. -->
-            <span>HTML</span>
+            <li>HTML</li>
             <!-- Skill styling web. -->
-            <span>CSS</span>
+            <li>CSS</li>
             <!-- Skill interaksi web. -->
-            <span>Javascript</span>
+            <li>Javascript</li>
           <!-- Menutup daftar software. -->
-          </div>
+          </ul>
         <!-- Menutup kartu software. -->
         </div>
       <!-- Menutup section CV. -->
-      </div>
+      </section>
       <!-- Section cover letter; id dipakai sebagai target link menu Cover Letter. -->
-      <div class="cl-content" id="cover-letter">
+      <section class="cl-content" id="cover-letter">
         <!-- Baris pembuka surat lamaran. -->
         <p>Yth. HRD / Art Director [Nama Studio Animasi],</p>
         <!-- Paragraf maksud melamar pekerjaan. -->
@@ -167,7 +207,7 @@
         <!-- Paragraf penutup surat. -->
         <p>Saya sangat bersedia untuk mengikuti tahap Anim Test (Tes Animasi) jika diperlukan. Terima kasih atas waktu dan kesempatan yang diberikan.</p>
       <!-- Menutup section cover letter. -->
-      </div>
+      </section>
     <!-- Menutup konten utama. -->
     </main>
     <!-- Footer berisi link sosial media yang melayang di bawah halaman. -->
@@ -188,8 +228,6 @@
       </div>
     <!-- Menutup footer. -->
     </footer>
-    <!-- Memuat JavaScript di akhir body agar HTML selesai dibaca sebelum script berjalan. -->
-    <script src="script.js"></script>
   <!-- Menutup body. -->
   </body>
 <!-- Menutup dokumen HTML. -->

@@ -1,40 +1,141 @@
 /* Menyimpan variabel global agar warna dan ukuran utama mudah diubah dari satu tempat. */
 :root {
-  --base-color: white; /* Warna dasar halaman untuk mode terang. */
-  --text-color: black; /* Warna teks utama untuk mode terang. */
-  --panel-color: #f6f2ed; /* Warna panel/kartu agar tidak sama persis dengan background. */
-  --accent-color: tomato; /* Warna aksen utama untuk tombol, menu, dan highlight. */
-  --line-color: rgba(0, 0, 0, 0.1); /* Warna garis tipis untuk border di mode terang. */
-  --content-width: min(100% - 32px, 1080px); /* Lebar konten: penuh dengan jarak 32px, tapi maksimal 1080px. */
+  --content-width: min(100% - 32px, 1080px);
+  /* Lebar konten: penuh dengan jarak 32px, tapi maksimal 1080px. */
+
+  /* Gradient Accent warna untuk Classic (Cosmic Theme) */
+  --classic-grad-light: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #c084fc 100%);
+  --classic-grad-dark: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+
+  /* Gradient Accent warna untuk Moss (Aurora Forest) */
+  --moss-grad-light: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
+  --moss-grad-dark: linear-gradient(135deg, #10b981 0%, #06b6d4 50%, #3b82f6 100%);
+
+  /* Gradient Accent warna untuk Coral (Sunset Breeze) */
+  --coral-grad-light: linear-gradient(135deg, #f97316 0%, #ef4444 50%, #ec4899 100%);
+  --coral-grad-dark: linear-gradient(135deg, #fdba74 0%, #f87171 50%, #f472b6 100%);
 }
 
-/* Saat body punya class darkmode, variabel warna diganti untuk tema gelap. */
-.darkmode {
-  --base-color: black; /* Background utama saat dark mode. */
-  --text-color: white; /* Teks utama saat dark mode. */
-  --panel-color: #151515; /* Warna kartu saat dark mode. */
-  --line-color: rgba(255, 255, 255, 0.14); /* Border dibuat terang tipis agar terlihat di background gelap. */
+/* Tema classic dalam mode terang. */
+[data-theme="classic"][data-mode="light"] {
+  --base-color: #f8f9fd;
+  /* Warna dasar halaman (solid) untuk mode terang. */
+  --text-color: #0f172a;
+  /* Warna teks utama untuk mode terang. */
+  --accent-gradient: var(--classic-grad-light);
+  /* Gradient accent untuk menu/button. */
+  --accent-solid: #6366f1;
+  /* Solid accent untuk border/fokus. */
+  --line-color: rgba(15, 23, 42, 0.08);
+  /* Warna garis tipis untuk border di mode terang. */
+}
+
+/* Tema classic dalam mode gelap. */
+[data-theme="classic"][data-mode="dark"] {
+  --base-color: #0b0f19;
+  /* Background utama saat dark mode. */
+  --text-color: #f1f5f9;
+  /* Teks utama saat dark mode. */
+  --accent-gradient: var(--classic-grad-dark);
+  /* Gradient accent untuk menu/button. */
+  --accent-solid: #a855f7;
+  /* Solid accent untuk border/fokus. */
+  --line-color: rgba(241, 245, 249, 0.1);
+  /* Border dibuat terang tipis agar terlihat di background gelap. */
+}
+
+/* Tema moss dalam mode terang. */
+[data-theme="moss"][data-mode="light"] {
+  --base-color: #f4fbf7;
+  /* Background hijau lembut untuk mode terang. */
+  --text-color: #062016;
+  /* Teks hijau gelap. */
+  --accent-gradient: var(--moss-grad-light);
+  /* Gradient accent untuk menu/button. */
+  --accent-solid: #10b981;
+  /* Solid accent untuk border/fokus. */
+  --line-color: rgba(6, 32, 22, 0.08);
+  /* Border halus sesuai tema moss. */
+}
+
+/* Tema moss dalam mode gelap. */
+[data-theme="moss"][data-mode="dark"] {
+  --base-color: #040d0a;
+  /* Background gelap kehijauan. */
+  --text-color: #e6f7f0;
+  /* Teks terang lembut. */
+  --accent-gradient: var(--moss-grad-dark);
+  /* Gradient accent untuk menu/button. */
+  --accent-solid: #06b6d4;
+  /* Solid accent untuk border/fokus. */
+  --line-color: rgba(230, 247, 240, 0.1);
+  /* Border terang tipis. */
+}
+
+/* Tema coral dalam mode terang. */
+[data-theme="coral"][data-mode="light"] {
+  --base-color: #fffaf5;
+  /* Background hangat terang. */
+  --text-color: #2d1610;
+  /* Teks gelap hangat. */
+  --accent-gradient: var(--coral-grad-light);
+  /* Gradient accent untuk menu/button. */
+  --accent-solid: #f97316;
+  /* Solid accent untuk border/fokus. */
+  --line-color: rgba(45, 22, 16, 0.08);
+  /* Border halus sesuai tema coral. */
+}
+
+/* Tema coral dalam mode gelap. */
+[data-theme="coral"][data-mode="dark"] {
+  --base-color: #160b08;
+  /* Background gelap hangat. */
+  --text-color: #fff5f0;
+  /* Teks terang hangat. */
+  --accent-gradient: var(--coral-grad-dark);
+  /* Gradient accent untuk menu/button. */
+  --accent-solid: #f87171;
+  /* Aksen coral lebih terang untuk dark mode. */
+  --line-color: rgba(255, 245, 240, 0.1);
+  /* Border dibuat terang tipis agar terlihat di background gelap. */
 }
 
 /* Semua gambar dibalik warnanya saat dark mode supaya ikon hitam tetap terlihat. */
-.darkmode img {
-  filter: brightness(0) invert(1); /* Mengubah ikon menjadi putih. */
-  transition: filter 250ms ease; /* Membuat perubahan filter terasa halus. */
+[data-mode="dark"] img {
+  filter: brightness(0) invert(1);
+  /* Mengubah ikon menjadi putih. */
+  transition: filter 250ms ease;
+  /* Membuat perubahan filter terasa halus. */
 }
 
 /* Style dasar untuk seluruh halaman. */
 body {
-  margin: 0; /* Menghapus margin bawaan browser. */
-  font-family: "Roboto", Arial, sans-serif; /* Memakai Roboto, lalu fallback ke Arial/sans-serif. */
-  color: var(--text-color); /* Warna teks mengikuti variabel tema. */
-  background: var(--base-color); /* Background mengikuti variabel tema. */
-  transition: color 250ms ease, background-color 250ms ease; /* Perubahan tema dibuat smooth. */
-  animation: page-fade-in 700ms ease both; /* Animasi intro saat halaman pertama dibuka. */
+  margin: 0;
+  /* Menghapus margin bawaan browser. */
+  font-family: "Roboto", Arial, sans-serif;
+  /* Memakai Roboto, lalu fallback ke Arial/sans-serif. */
+  color: var(--text-color);
+  /* Warna teks mengikuti variabel tema. */
+  background: var(--base-color);
+  /* Background solid mengikuti variabel tema. */
+  transition: color 250ms ease, background-color 250ms ease;
+  /* Perubahan tema dibuat smooth. */
+  animation: page-fade-in 700ms ease both;
+  /* Animasi intro saat halaman pertama dibuka. */
+  scrollbar-gutter: stable;
+  /* Mereservasi space scrollbar untuk mencegah jitter saat modal terbuka. */
+}
+
+/* Saat modal terbuka, halaman belakang tidak ikut scroll. */
+body.modal-open {
+  overflow: hidden;
+  /* Mengunci scroll halaman di belakang modal. */
 }
 
 /* Style level dokumen untuk mengatur perilaku scroll. */
 html {
-  scroll-behavior: smooth; /* Membuat klik anchor menu scroll secara halus. */
+  scroll-behavior: smooth;
+  /* Membuat klik anchor menu scroll secara halus. */
 }
 
 /* Semua target anchor diberi jarak dari atas agar tidak tertutup floating header. */
@@ -42,491 +143,1130 @@ html {
 #demo-reel,
 #curriculum-vitae,
 #cover-letter {
-  scroll-margin-top: 76px; /* Offset scroll setinggi header plus sedikit ruang napas. */
+  scroll-margin-top: 76px;
+  /* Offset scroll setinggi header plus sedikit ruang napas. */
 }
 
 /* Target demo reel berupa span tersembunyi di dalam section video. */
 #demo-reel {
-  position: absolute; /* Diletakkan relatif terhadap .video-content. */
-  inset-block-start: 0; /* Menempatkan target di sisi atas section. */
+  position: absolute;
+  /* Diletakkan relatif terhadap .video-content. */
+  inset-block-start: 0;
+  /* Menempatkan target di sisi atas section. */
 }
 
-/* Header melayang yang berisi home, menu, dan switch theme. */
+/* Parent header element sebagai sticky container. */
+header {
+  position: sticky;
+  top: 12px;
+  /* Jarak 12px dari atas viewport saat melayang sticky. */
+  z-index: 100;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  /* Clicks can pass through the transparent areas of header wrapper */
+}
+
+/* Floating header bar — grid 3 kolom: home | menu | actions. */
 .floating-header {
-  position: fixed; /* Membuat header tetap di layar saat halaman discroll. */
-  top: 0; /* Menempel ke bagian atas viewport. */
-  left: 50%; /* Titik kiri digeser ke tengah layar. */
-  z-index: 100; /* Memastikan header berada di atas konten. */
-  display: flex; /* Menyusun anak-anak header secara horizontal. */
-  align-items: center; /* Menengahkan item secara vertikal. */
-  justify-content: center; /* Menengahkan item secara horizontal. */
-  margin: 8px auto; /* Memberi jarak kecil dari atas viewport. */
-  gap: 4px; /* Jarak antar blok header. */
-  transform: translateX(-50%); /* Mengoreksi left 50% agar elemen benar-benar center. */
-  animation: header-intro 700ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both; /* Animasi header masuk dari atas. */
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  /* 3 kolom: home kiri, menu tengah (fleksibel), actions kanan. */
+  align-items: center;
+  /* Menengahkan isi secara vertikal. */
+  gap: 8px;
+  /* Jarak antar kolom. */
+  width: 100%;
+  max-width: 720px;
+  /* Lebar maksimum agar header tidak terlalu lebar di layar besar. */
+  margin: 0 auto;
+  /* Memusatkan header secara horizontal di dalam parent. */
+  padding: 4px;
+  /* Ruang dalam floating header. */
+  pointer-events: auto;
+  /* Mengaktifkan kembali klik di area header (parent nonaktifkan). */
 }
 
 /* Tombol home berbentuk lingkaran. */
 .home {
-  display: flex; /* Memudahkan ikon ditengahkan. */
-  align-items: center; /* Menengahkan ikon secara vertikal. */
-  justify-content: center; /* Menengahkan ikon secara horizontal. */
-  background-color: tomato; /* Warna tombol mengikuti aksen visual website. */
-  border-radius: 100%; /* Membuat bentuk lingkaran. */
-  width: 48px; /* Lebar tombol home. */
-  height: 48px; /* Tinggi tombol home. */
-  cursor: pointer; /* Memberi tanda bahwa elemen bisa diklik. */
-  text-decoration: none; /* Menghapus underline bawaan link. */
+  display: flex;
+  /* Memudahkan ikon ditengahkan. */
+  align-items: center;
+  /* Menengahkan ikon secara vertikal. */
+  justify-content: center;
+  /* Menengahkan ikon secara horizontal. */
+  background: var(--accent-gradient);
+  /* Warna tombol mengikuti gradient aksen tema. */
+  border-radius: 100%;
+  /* Membuat bentuk lingkaran. */
+  width: 48px;
+  /* Lebar tombol home. */
+  height: 48px;
+  /* Tinggi tombol home. */
+  cursor: pointer;
+  /* Memberi tanda bahwa elemen bisa diklik. */
+  text-decoration: none;
+  /* Menghapus underline bawaan link. */
 }
 
 /* Tombol switch theme. */
 .switch-theme {
-  position: relative; /* Menjadi acuan posisi untuk elemen anak absolut. */
-  display: flex; /* Memakai flexbox untuk menengahkan isi. */
-  align-items: center; /* Menengahkan ikon secara vertikal. */
-  justify-content: center; /* Menengahkan ikon secara horizontal. */
-  width: 48px; /* Lebar tombol theme. */
-  height: 48px; /* Tinggi tombol theme. */
-  background-color: tomato; /* Warna latar tombol theme. */
-  border-radius: 100%; /* Membuat tombol theme berbentuk lingkaran. */
-  cursor: pointer; /* Menandai tombol bisa diklik. */
+  position: relative;
+  /* Menjadi acuan posisi untuk elemen anak absolut. */
+  display: flex;
+  /* Memakai flexbox untuk menengahkan isi. */
+  align-items: center;
+  /* Menengahkan ikon secara vertikal. */
+  justify-content: center;
+  /* Menengahkan ikon secara horizontal. */
+  width: 48px;
+  /* Lebar tombol theme. */
+  height: 48px;
+  /* Tinggi tombol theme. */
+  padding: 0;
+  /* Menghapus padding bawaan button agar ukuran visual tetap sama. */
+  border: 0;
+  /* Menghapus border bawaan button. */
+  background: var(--accent-gradient);
+  /* Warna latar tombol theme mengikuti gradient aksen tema. */
+  border-radius: 100%;
+  /* Membuat tombol theme berbentuk lingkaran. */
+  cursor: pointer;
+  /* Menandai tombol bisa diklik. */
+}
+
+/* Wrapper tombol pilihan tema warna. */
+.theme-picker {
+  position: relative;
+  display: flex;
+  /* Menyusun tombol tema secara horizontal. */
+  align-items: center;
+  /* Menengahkan swatch secara vertikal. */
+  gap: 4px;
+  /* Jarak antar tombol tema. */
+  margin-left: 2px;
+  /* Jarak sangat pendek dari tombol switch-theme. */
+}
+
+.theme-picker-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  border-radius: 100%;
+  background: var(--accent-gradient);
+  /* Trigger picker menggunakan gradient aksen. */
+  cursor: pointer;
+}
+
+.theme-picker-trigger img {
+  width: 32px;
+  height: 32px;
+  display: block;
+}
+
+.theme-picker-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  /* Panel muncul tepat di bawah trigger dengan jarak 8px. */
+  left: 50%;
+  transform: translateX(-50%);
+  /* Memusatkan panel secara horizontal di bawah trigger. */
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px;
+  background: var(--base-color);
+  border: 1px solid var(--line-color);
+  border-radius: 18px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+  min-width: 48px;
+  max-width: 48px;
+  z-index: 101;
+}
+
+.theme-picker-panel[hidden] {
+  display: none;
+}
+
+/* Tombol swatch untuk memilih data-theme. */
+.theme-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  /* Menyamakan ukuran dengan tombol switch-theme. */
+  height: 48px;
+  /* Menyamakan ukuran dengan tombol switch-theme. */
+  padding: 0;
+  /* Menghapus padding bawaan button. */
+  border: 0;
+  /* Sama dengan .switch-theme (tanpa border). */
+  border-radius: 100%;
+  /* Bentuk lingkaran. */
+  cursor: pointer;
+  /* Menandai tombol bisa diklik. */
+  background: var(--accent-gradient);
+  /* Menyamakan latar dengan switch-theme. */
+  overflow: hidden;
+  /* Menyamakan clipping ikon dengan switch-theme. */
+  transition: transform 180ms ease, opacity 180ms ease;
+  /* Transisi halus. */
+}
+
+/* Swatch tema classic dengan warna gradient spesifik mode. */
+[data-mode="light"] .theme-option-classic {
+  background: var(--classic-grad-light);
+}
+
+[data-mode="dark"] .theme-option-classic {
+  background: var(--classic-grad-dark);
+}
+
+/* Swatch tema moss dengan warna gradient spesifik mode. */
+[data-mode="light"] .theme-option-moss {
+  background: var(--moss-grad-light);
+}
+
+[data-mode="dark"] .theme-option-moss {
+  background: var(--moss-grad-dark);
+}
+
+/* Swatch tema coral dengan warna gradient spesifik mode. */
+[data-mode="light"] .theme-option-coral {
+  background: var(--coral-grad-light);
+}
+
+[data-mode="dark"] .theme-option-coral {
+  background: var(--coral-grad-dark);
+}
+
+/* Ukuran ikon di dalam tombol tema agar seragam dengan switch-theme. */
+.theme-option img {
+  width: 32px;
+  height: 32px;
+  display: block;
+  transition: transform 220ms ease, opacity 220ms ease;
+}
+
+/* State hover, fokus, dan aktif untuk tombol tema. */
+.theme-option[aria-pressed="true"] {
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.48);
+  /* Ring dalam saat aktif agar terlihat. */
 }
 
 /* Wrapper dua ikon theme yang saling bergantian. */
 .theme-icons {
-  position: relative; /* Menjadi acuan posisi absolut untuk icon gelap/terang. */
-  width: 100%; /* Mengisi seluruh lebar tombol. */
-  height: 100%; /* Mengisi seluruh tinggi tombol. */
-  border-radius: 100%; /* Mengikuti bentuk lingkaran tombol. */
-  overflow: hidden; /* Menyembunyikan ikon saat animasi keluar area tombol. */
+  position: relative;
+  /* Menjadi acuan posisi absolut untuk icon gelap/terang. */
+  width: 100%;
+  /* Mengisi seluruh lebar tombol. */
+  height: 100%;
+  /* Mengisi seluruh tinggi tombol. */
+  border-radius: 100%;
+  /* Mengikuti bentuk lingkaran tombol. */
+  overflow: hidden;
+  /* Menyembunyikan ikon saat animasi keluar area tombol. */
 }
 
 /* Style dasar untuk setiap span ikon di tombol theme. */
 .switch-theme span {
-  position: absolute; /* Menumpuk ikon di posisi yang sama. */
-  inset: 0; /* Membuat span memenuhi seluruh area wrapper. */
-  display: flex; /* Memakai flexbox untuk menengahkan gambar. */
-  align-items: center; /* Menengahkan gambar secara vertikal. */
-  justify-content: center; /* Menengahkan gambar secara horizontal. */
-  opacity: 0; /* Default disembunyikan dulu. */
-  transform: translateY(0); /* Posisi dasar sebelum animasi geser. */
-  pointer-events: none; /* Klik tetap diterima wrapper tombol, bukan span. */
-  transition: opacity 220ms ease, transform 320ms ease; /* Animasi transisi ikon. */
+  position: absolute;
+  /* Menumpuk ikon di posisi yang sama. */
+  inset: 0;
+  /* Membuat span memenuhi seluruh area wrapper. */
+  display: flex;
+  /* Memakai flexbox untuk menengahkan gambar. */
+  align-items: center;
+  /* Menengahkan gambar secara vertikal. */
+  justify-content: center;
+  /* Menengahkan gambar secara horizontal. */
+  opacity: 0;
+  /* Default disembunyikan dulu. */
+  transform: translateY(0);
+  /* Posisi dasar sebelum animasi geser. */
+  pointer-events: none;
+  /* Klik tetap diterima wrapper tombol, bukan span. */
+  transition: opacity 220ms ease, transform 320ms ease;
+  /* Animasi transisi ikon. */
 }
 
 /* Ukuran ikon di tombol theme. */
 .switch-theme img {
-  width: 32px; /* Lebar ikon theme. */
-  height: 32px; /* Tinggi ikon theme. */
+  width: 32px;
+  /* Lebar ikon theme. */
+  height: 32px;
+  /* Tinggi ikon theme. */
 }
 
 /* Ikon gelap terlihat sebagai default saat belum dark mode. */
 .switch-theme .gelap {
-  opacity: 1; /* Menampilkan ikon gelap. */
+  opacity: 1;
+  /* Menampilkan ikon gelap. */
 }
 
 /* Ikon terang disiapkan di bawah tombol sebelum dark mode aktif. */
 .switch-theme .terang {
-  transform: translateY(100%); /* Menggeser ikon terang ke bawah area tombol. */
+  transform: translateY(100%);
+  /* Menggeser ikon terang ke bawah area tombol. */
 }
 
 /* Saat dark mode aktif, ikon gelap disembunyikan ke atas. */
-.darkmode .switch-theme .gelap {
-  opacity: 0; /* Menyembunyikan ikon gelap. */
-  transform: translateY(-100%); /* Menggeser ikon gelap ke atas. */
+[data-mode="dark"] .switch-theme .gelap {
+  opacity: 0;
+  /* Menyembunyikan ikon gelap. */
+  transform: translateY(-100%);
+  /* Menggeser ikon gelap ke atas. */
 }
 
 /* Saat dark mode aktif, ikon terang ditampilkan di tengah. */
-.darkmode .switch-theme .terang {
-  opacity: 1; /* Menampilkan ikon terang. */
-  transform: translateY(0); /* Mengembalikan ikon terang ke posisi tengah. */
+[data-mode="dark"] .switch-theme .terang {
+  opacity: 1;
+  /* Menampilkan ikon terang. */
+  transform: translateY(0);
+  /* Mengembalikan ikon terang ke posisi tengah. */
 }
 
 /* Menu navigasi utama berbentuk pil. */
 .menu {
-  position: relative; /* Menjadi acuan jika anak butuh posisi relatif. */
-  display: flex; /* Menyusun link menu secara horizontal. */
-  align-items: center; /* Menengahkan ikon menu secara vertikal. */
-  width: max-content; /* Lebar mengikuti isi menu. */
-  padding: 8px 24px; /* Ruang dalam menu atas-bawah dan kiri-kanan. */
-  gap: 12px; /* Jarak antar ikon menu. */
-  margin: 4px; /* Jarak kecil dari tombol home/theme. */
-  background: tomato; /* Warna latar menu. */
-  border-radius: 32px; /* Membuat menu berbentuk pil. */
-  cursor: pointer; /* Memberi kesan menu bisa diklik. */
+  position: relative;
+  /* Menjadi acuan jika anak butuh posisi relatif. */
+  display: flex;
+  /* Menyusun link menu secara horizontal. */
+  align-items: center;
+  /* Menengahkan ikon menu secara vertikal. */
+  width: max-content;
+  /* Lebar mengikuti isi menu. */
+  padding: 8px 24px;
+  /* Ruang dalam menu atas-bawah dan kiri-kanan. */
+  gap: 12px;
+  /* Jarak antar ikon menu. */
+  justify-self: center;
+  /* Menaruh menu di tengah header. */
+  background: var(--accent-gradient);
+  /* Warna latar menu mengikuti gradient aksen tema. */
+  border-radius: 32px;
+  /* Membuat menu berbentuk pil. */
+  cursor: pointer;
+  /* Memberi kesan menu bisa diklik. */
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
 }
 
 /* Menyamakan perilaku layout span dan link di floating header. */
 .floating-header span,
 .floating-header a {
-  display: flex; /* Membuat isi link/span mudah ditata. */
-  align-items: center; /* Menengahkan isi secara vertikal. */
-  gap: 4px; /* Jarak kecil jika suatu saat ada ikon plus teks. */
+  display: flex;
+  /* Membuat isi link/span mudah ditata. */
+  align-items: center;
+  /* Menengahkan isi secara vertikal. */
+  gap: 4px;
+  /* Jarak kecil jika suatu saat ada ikon plus teks. */
 }
 
 /* Style dasar link di dalam menu. */
 .menu a {
-  color: inherit; /* Warna link mengikuti warna parent. */
-  text-decoration: none; /* Menghapus underline bawaan link. */
+  color: inherit;
+  /* Warna link mengikuti warna parent. */
+  text-decoration: none;
+  /* Menghapus underline bawaan link. */
 }
 
 /* Outline aksesibilitas untuk elemen interaktif saat fokus keyboard. */
 .menu a:focus-visible,
 .home:focus-visible,
 .switch-theme:focus-visible,
+.theme-option:focus-visible,
 .socials-btn:focus-visible {
-  outline: 2px solid var(--text-color); /* Garis fokus yang kontras dengan tema aktif. */
-  outline-offset: 4px; /* Menjauhkan outline dari elemen agar tidak menempel. */
+  outline: 2px solid var(--text-color);
+  /* Garis fokus yang kontras dengan tema aktif. */
+  outline-offset: 4px;
+  /* Menjauhkan outline dari elemen agar tidak menempel. */
 }
 
 /* Semua elemen dengan data-tooltip menjadi acuan posisi tooltip. */
 [data-tooltip] {
-  position: relative; /* Pseudo-element tooltip diposisikan relatif ke elemen ini. */
+  position: relative;
+  /* Pseudo-element tooltip diposisikan relatif ke elemen ini. */
 }
 
 /* Kotak tooltip dibuat dari pseudo-element after. */
 [data-tooltip]::after {
-  position: absolute; /* Tooltip keluar dari alur normal layout. */
-  left: 50%; /* Posisi horizontal dimulai dari tengah elemen. */
-  top: calc(100% + 8px); /* Tooltip muncul di bawah elemen dengan jarak 8px. */
-  z-index: 101; /* Tooltip berada di atas header/footer dan konten. */
-  content: attr(data-tooltip); /* Isi tooltip diambil dari atribut data-tooltip. */
-  width: max-content; /* Lebar mengikuti isi teks. */
-  max-width: 160px; /* Membatasi tooltip agar tidak terlalu panjang. */
-  padding: 6px 10px; /* Ruang dalam tooltip. */
-  color: var(--base-color); /* Teks tooltip memakai warna kebalikan tema. */
-  background: var(--text-color); /* Background tooltip memakai warna teks utama. */
-  border-radius: 8px; /* Sudut tooltip dibuat lembut. */
-  font-size: 12px; /* Ukuran teks tooltip kecil. */
-  line-height: 1; /* Tinggi baris tooltip dibuat rapat. */
-  opacity: 0; /* Tooltip default tidak terlihat. */
-  pointer-events: none; /* Tooltip tidak menghalangi hover/klik. */
-  transform: translate(-50%, -4px); /* Menengahkan tooltip dan memberi posisi awal animasi. */
-  transition: opacity 180ms ease, transform 180ms ease; /* Animasi tooltip muncul/hilang. */
-  white-space: nowrap; /* Tooltip tetap satu baris. */
+  position: absolute;
+  /* Tooltip keluar dari alur normal layout. */
+  left: 50%;
+  /* Posisi horizontal dimulai dari tengah elemen. */
+  top: calc(100% + 8px);
+  /* Tooltip muncul di bawah elemen dengan jarak 8px. */
+  z-index: 101;
+  /* Tooltip berada di atas header/footer dan konten. */
+  content: attr(data-tooltip);
+  /* Isi tooltip diambil dari atribut data-tooltip. */
+  width: max-content;
+  /* Lebar mengikuti isi teks. */
+  max-width: 160px;
+  /* Membatasi tooltip agar tidak terlalu panjang. */
+  padding: 6px 10px;
+  /* Ruang dalam tooltip. */
+  color: var(--base-color);
+  /* Teks tooltip memakai warna kebalikan tema. */
+  background: var(--text-color);
+  /* Background tooltip memakai warna teks utama. */
+  border-radius: 8px;
+  /* Sudut tooltip dibuat lembut. */
+  font-size: 12px;
+  /* Ukuran teks tooltip kecil. */
+  line-height: 1;
+  /* Tinggi baris tooltip dibuat rapat. */
+  opacity: 0;
+  /* Tooltip default tidak terlihat. */
+  pointer-events: none;
+  /* Tooltip tidak menghalangi hover/klik. */
+  transform: translate(-50%, -4px);
+  /* Menengahkan tooltip dan memberi posisi awal animasi. */
+  transition: opacity 180ms ease, transform 180ms ease;
+  /* Animasi tooltip muncul/hilang. */
+  white-space: nowrap;
+  /* Tooltip tetap satu baris. */
 }
 
 /* Tooltip muncul saat elemen di-hover atau mendapat fokus keyboard. */
 [data-tooltip]:hover::after,
 [data-tooltip]:focus-visible::after {
-  opacity: 1; /* Menampilkan tooltip. */
-  transform: translate(-50%, 0); /* Menggeser tooltip ke posisi final. */
+  opacity: 1;
+  /* Menampilkan tooltip. */
+  transform: translate(-50%, 0);
+  /* Menggeser tooltip ke posisi final. */
 }
 
 /* Tooltip footer dipindah ke atas karena footer berada di bawah layar. */
 .floating-footer [data-tooltip]::after {
-  top: auto; /* Membatalkan posisi tooltip bawah dari aturan umum. */
-  bottom: calc(100% + 8px); /* Tooltip footer muncul di atas ikon. */
-  transform: translate(-50%, 4px); /* Posisi awal animasi dari bawah ke atas. */
+  top: auto;
+  /* Membatalkan posisi tooltip bawah dari aturan umum. */
+  bottom: calc(100% + 8px);
+  /* Tooltip footer muncul di atas ikon. */
+  transform: translate(-50%, 4px);
+  /* Posisi awal animasi dari bawah ke atas. */
 }
 
 /* Posisi final tooltip footer saat hover/fokus. */
 .floating-footer [data-tooltip]:hover::after,
 .floating-footer [data-tooltip]:focus-visible::after {
-  transform: translate(-50%, 0); /* Menggeser tooltip footer ke posisi final. */
+  transform: translate(-50%, 0);
+  /* Menggeser tooltip footer ke posisi final. */
 }
 
 /* Footer sosial media yang melayang di bawah viewport. */
 .floating-footer {
-  position: fixed; /* Membuat footer tetap terlihat saat scroll. */
-  bottom: 8px; /* Jarak footer dari bawah viewport. */
-  left: 0; /* Membentangkan area hitung dari kiri viewport. */
-  right: 0; /* Membentangkan area hitung sampai kanan viewport. */
-  z-index: 100; /* Footer berada di atas konten. */
-  display: flex; /* Menyusun ikon sosial secara horizontal. */
-  align-items: center; /* Menengahkan ikon secara vertikal. */
-  justify-content: center; /* Menengahkan ikon secara horizontal. */
-  gap: 12px; /* Jarak antar ikon sosial. */
-  padding: 6px 24px; /* Ruang dalam footer. */
-  width: fit-content; /* Lebar footer mengikuti jumlah ikon. */
-  margin-inline: auto; /* Menengahkan footer secara horizontal. */
-  background-color: tomato; /* Warna latar footer. */
-  border-radius: 32px; /* Membuat footer berbentuk pil. */
-  animation: footer-intro 700ms cubic-bezier(0.22, 1, 0.36, 1) 220ms both; /* Animasi footer masuk dari bawah. */
+  position: fixed;
+  /* Membuat footer tetap terlihat saat scroll. */
+  bottom: 8px;
+  /* Jarak footer dari bawah viewport. */
+  left: 0;
+  /* Membentangkan area hitung dari kiri viewport. */
+  right: 0;
+  /* Membentangkan area hitung sampai kanan viewport. */
+  z-index: 100;
+  /* Footer berada di atas konten. */
+  display: flex;
+  /* Menyusun ikon sosial secara horizontal. */
+  align-items: center;
+  /* Menengahkan ikon secara vertikal. */
+  justify-content: center;
+  /* Menengahkan ikon secara horizontal. */
+  gap: 12px;
+  /* Jarak antar ikon sosial. */
+  padding: 6px 24px;
+  /* Ruang dalam footer. */
+  width: fit-content;
+  /* Lebar footer mengikuti jumlah ikon. */
+  margin-inline: auto;
+  /* Menengahkan footer secara horizontal. */
+  background: var(--accent-gradient);
+  /* Warna latar footer mengikuti gradient aksen tema. */
+  border-radius: 32px;
+  /* Membuat footer berbentuk pil. */
+  animation: footer-intro 700ms cubic-bezier(0.22, 1, 0.36, 1) 220ms both;
+  /* Animasi footer masuk dari bawah. */
 }
 
 /* Link ikon sosial media. */
 .socials-btn {
-  width: 32px; /* Lebar area klik ikon sosial. */
-  height: 32px; /* Tinggi area klik ikon sosial. */
-  display: flex; /* Memudahkan ikon diatur di dalam link. */
-  color: inherit; /* Warna link mengikuti parent. */
-  text-decoration: none; /* Menghapus underline bawaan link. */
+  width: 32px;
+  /* Lebar area klik ikon sosial. */
+  height: 32px;
+  /* Tinggi area klik ikon sosial. */
+  display: flex;
+  /* Memudahkan ikon diatur di dalam link. */
+  color: inherit;
+  /* Warna link mengikuti parent. */
+  text-decoration: none;
+  /* Menghapus underline bawaan link. */
+}
+
+/* Semua section konten utama ditengahkan vertikal dan horizontal di viewport. */
+.video-content,
+.cv-content,
+.cl-content {
+  width: min(100%, var(--content-width));
+  margin: 0 auto;
+  min-height: calc(100vh - 140px);
+  padding-block: 24px;
 }
 
 /* Section video demo reel. */
 .video-content {
-  min-height: 100vh; /* Tinggi minimal satu layar penuh. */
-  position: relative; /* Menjadi acuan posisi untuk target #demo-reel. */
-  display: flex; /* Memakai flexbox untuk menengahkan video. */
-  align-items: center; /* Menengahkan video secara vertikal. */
-  justify-content: center; /* Menengahkan video secara horizontal. */
-  width: var(--content-width); /* Lebar section sama dengan section lain. */
-  margin: 0 auto; /* Menengahkan section di halaman. */
-  padding: 88px 0 92px; /* Ruang atas/bawah agar tidak tertutup header/footer. */
-  box-sizing: border-box; /* Padding dihitung di dalam lebar total. */
-  animation: content-intro 800ms cubic-bezier(0.22, 1, 0.36, 1) 260ms both; /* Animasi konten masuk. */
+  position: relative;
+  /* Menjadi acuan posisi untuk target #demo-reel. */
+  display: flex;
+  /* Memakai flexbox untuk menengahkan video. */
+  align-items: safe center;
+  /* Menengahkan video secara vertikal; aman saat konten lebih tinggi dari layar. */
+  justify-content: safe center;
+  /* Menengahkan video secara horizontal; aman saat konten lebih lebar dari layar. */
+  animation: content-intro 800ms cubic-bezier(0.22, 1, 0.36, 1) 260ms both;
+  /* Animasi konten masuk. */
 }
 
-/* Elemen video di dalam section demo reel. */
-.video-content video {
-  width: 100%; /* Video mengisi lebar container. */
-  max-width: 1280px; /* Batas lebar agar video tidak terlalu besar. */
-  height: auto; /* Tinggi menyesuaikan rasio video. */
-  max-height: 720px; /* Batas tinggi video. */
-  aspect-ratio: 16 / 9; /* Menjaga rasio video landscape. */
-  object-fit: contain; /* Seluruh video terlihat tanpa crop. */
-  border-radius: 8px; /* Sudut video sedikit melengkung. */
-  background: black; /* Background hitam jika area video belum terisi. */
+/* Tombol preview pembuka modal demo reel. */
+.video-open {
+  position: relative;
+  /* Menjadi acuan posisi label play. */
+  display: grid;
+  /* Menumpuk preview dan label play di area yang sama. */
+  place-items: center;
+  /* Menengahkan isi tombol. */
+  width: 100%;
+  /* Video mengisi lebar container. */
+  max-width: 1920px;
+  /* Batas lebar agar video memenuhi 1920x1080. */
+  padding: 0;
+  /* Menghapus padding bawaan button. */
+  border: 0;
+  /* Menghapus border bawaan button. */
+  border-radius: 8px;
+  /* Sudut preview sedikit melengkung. */
+  background: black;
+  /* Background hitam jika video belum terisi. */
+  cursor: pointer;
+  /* Menandai preview bisa diklik. */
+  overflow: hidden;
+  /* Menjaga video dan overlay tetap mengikuti sudut. */
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.16);
+  /* Bayangan halus agar preview terasa bisa dibuka. */
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 260ms ease;
+  /* Gerak hover halus. */
+}
+
+/* Feedback hover/fokus untuk preview video. */
+.video-open:hover,
+.video-open:focus-visible {
+  transform: translateY(-4px) scale(1.01);
+  /* Preview naik dan membesar sedikit saat aktif. */
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.22);
+  /* Bayangan lebih kuat saat interaksi. */
+}
+
+/* Outline aksesibilitas tombol preview. */
+.video-open:focus-visible {
+  outline: 2px solid var(--text-color);
+  /* Garis fokus keyboard. */
+  outline-offset: 6px;
+  /* Menjauhkan outline dari preview. */
+}
+
+/* Preview video di tombol pembuka modal. */
+.video-open video {
+  grid-area: 1 / 1;
+  /* Menumpuk video dengan label play. */
+  width: 100%;
+  /* Video mengisi lebar tombol. */
+  height: auto;
+  /* Tinggi menyesuaikan rasio video. */
+  aspect-ratio: 16 / 9;
+  /* Menjaga rasio video landscape. */
+  object-fit: contain;
+  /* Seluruh video terlihat tanpa crop. */
+}
+
+/* Label play di atas preview video. */
+.video-open span {
+  grid-area: 1 / 1;
+  /* Menempatkan label di atas video. */
+  padding: 12px 18px;
+  /* Ruang dalam label. */
+  color: #f0e7d5;
+  /* Teks label kontras di atas video. */
+  background: rgba(33, 40, 66, 0.82);
+  /* Latar label semi transparan. */
+  border-radius: 999px;
+  /* Label berbentuk pil. */
+  font-size: 14px;
+  /* Ukuran label ringkas. */
+  font-weight: 800;
+  /* Label dibuat tegas. */
+  line-height: 1;
+  /* Tinggi baris rapat. */
+  pointer-events: none;
+  /* Klik tetap diterima tombol preview. */
+  transform: translateY(0);
+  /* Posisi dasar label. */
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), background-color 260ms ease;
+  /* Animasi label. */
+}
+
+/* Label play ikut bergerak saat preview aktif. */
+.video-open:hover span,
+.video-open:focus-visible span {
+  transform: translateY(-2px) scale(1.04);
+  /* Label sedikit naik dan membesar. */
+  background: rgba(33, 40, 66, 0.92);
+  /* Background label sedikit lebih solid. */
+}
+
+/* Overlay modal demo reel. */
+.video-modal {
+  position: fixed;
+  /* Modal selalu menutup viewport. */
+  inset: 0;
+  /* Mengisi seluruh layar. */
+  z-index: 999;
+  /* Di atas header, footer, dan tooltip. */
+  display: grid;
+  /* Menengahkan panel video. */
+  place-items: center;
+  /* Panel berada di tengah viewport. */
+  padding: 28px;
+  /* Ruang aman dari tepi layar. */
+  box-sizing: border-box;
+  /* Padding dihitung di dalam viewport. */
+}
+
+/* Modal yang masih hidden tidak tampil. */
+.video-modal[hidden] {
+  display: none;
+  /* Menyembunyikan modal dari layout. */
+}
+
+/* Backdrop gelap di belakang video. */
+.video-modal-backdrop {
+  position: absolute;
+  /* Menutup seluruh area modal. */
+  inset: 0;
+  /* Mengisi viewport. */
+  padding: 0;
+  /* Menghapus padding bawaan button. */
+  border: 0;
+  /* Menghapus border bawaan button. */
+  background: rgba(10, 12, 20, 0.74);
+  /* Overlay gelap transparan tanpa filter berat. */
+  cursor: pointer;
+  /* Backdrop bisa diklik untuk menutup modal. */
+  opacity: 0;
+  /* State awal animasi masuk. */
+  will-change: opacity;
+  /* Memberi hint animasi ringan ke browser. */
+  transition: opacity 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  /* Fade backdrop dibuat lebih cepat dan ringan. */
+}
+
+/* Panel video modal. */
+.video-modal-panel {
+  position: relative;
+  /* Acuan tombol close. */
+  z-index: 1;
+  /* Panel berada di atas backdrop. */
+  width: min(94vw, 1440px);
+  /* Hampir full screen tetapi tetap punya margin. */
+  max-height: 88vh;
+  /* Menjaga panel tidak menabrak viewport. */
+  aspect-ratio: 16 / 9;
+  /* Panel mengikuti rasio video. */
+  border-radius: 8px;
+  /* Sudut panel konsisten dengan desain. */
+  background: black;
+  /* Background hitam di belakang video. */
+  box-shadow: 0 22px 56px rgba(0, 0, 0, 0.38);
+  /* Bayangan modal dibuat lebih ringan agar animasi lancar. */
+  opacity: 0;
+  /* State awal animasi masuk. */
+  transform: translate3d(0, 18px, 0) scale(0.97);
+  /* Modal masuk dari bawah dengan jarak lebih pendek. */
+  will-change: opacity, transform;
+  /* Mengoptimalkan properti yang dianimasikan. */
+  transition: opacity 220ms cubic-bezier(0.22, 1, 0.36, 1), transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  /* Easing cepat dan halus seperti GSAP. */
+}
+
+/* Video di dalam modal. */
+.video-modal-panel video {
+  display: block;
+  /* Menghapus gap inline bawaan video. */
+  width: 100%;
+  /* Video mengisi panel. */
+  height: 100%;
+  /* Video mengikuti tinggi panel. */
+  border-radius: inherit;
+  /* Sudut video mengikuti panel. */
+  object-fit: contain;
+  /* Video tidak tercrop. */
+}
+
+/* Tombol close modal. */
+.video-modal-close {
+  position: absolute;
+  /* Diletakkan di pojok panel. */
+  top: -18px;
+  /* Sedikit keluar dari panel agar mudah dijangkau. */
+  right: -18px;
+  /* Sedikit keluar dari panel. */
+  z-index: 2;
+  /* Di atas video. */
+  display: grid;
+  /* Menengahkan tanda close. */
+  place-items: center;
+  /* Tanda close tepat di tengah. */
+  width: 44px;
+  /* Area klik close. */
+  height: 44px;
+  /* Area klik close. */
+  padding: 0;
+  /* Menghapus padding bawaan button. */
+  border: 0;
+  /* Menghapus border bawaan button. */
+  border-radius: 100%;
+  /* Tombol close bulat. */
+  color: var(--base-color);
+  /* Warna tanda close. */
+  background: var(--text-color);
+  /* Background close mengikuti tema. */
+  cursor: pointer;
+  /* Tombol bisa diklik. */
+  font-size: 28px;
+  /* Ukuran tanda close. */
+  line-height: 1;
+  /* Menjaga tanda close tetap center. */
+  transition: transform 180ms ease, background-color 250ms ease;
+  /* Feedback hover halus. */
+}
+
+/* Feedback hover tombol close. */
+.video-modal-close:hover,
+.video-modal-close:focus-visible {
+  transform: scale(1.08);
+  /* Tombol close sedikit membesar. */
+}
+
+/* State modal terbuka. */
+.video-modal.is-open .video-modal-backdrop {
+  opacity: 1;
+  /* Backdrop terlihat setelah modal dibuka. */
+}
+
+/* Panel masuk dengan rasa smooth seperti GSAP. */
+.video-modal.is-open .video-modal-panel {
+  opacity: 1;
+  /* Panel terlihat penuh. */
+  transform: translate3d(0, 0, 0) scale(1);
+  /* Panel sampai ke posisi final. */
+}
+
+/* State modal keluar. */
+.video-modal.is-closing .video-modal-panel {
+  opacity: 0;
+  /* Panel memudar saat close. */
+  transform: translate3d(0, 10px, 0) scale(0.985);
+  /* Panel turun sedikit saat keluar. */
 }
 
 /* Section CV memakai layout Bento Grid. */
 .cv-content {
-  min-height: 100vh; /* Tinggi minimal satu layar penuh. */
-  display: grid; /* Mengaktifkan CSS Grid untuk layout kartu. */
-  grid-template-columns: repeat(4, minmax(0, 1fr)); /* Membuat 4 kolom fleksibel. */
-  grid-auto-rows: minmax(150px, auto); /* Tinggi minimum kartu 150px, bisa membesar sesuai isi. */
-  gap: 12px; /* Jarak antar kartu. */
-  width: var(--content-width); /* Lebar section disamakan dengan section lain. */
-  margin: 0 auto; /* Menengahkan grid. */
-  padding: 88px 0 92px; /* Ruang aman dari header dan footer fixed. */
-  box-sizing: border-box; /* Padding masuk perhitungan ukuran. */
-  animation: content-intro 800ms cubic-bezier(0.22, 1, 0.36, 1) 360ms both; /* Animasi section CV muncul. */
+  display: grid;
+  /* Mengaktifkan CSS Grid untuk layout kartu. */
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  /* Membuat 4 kolom fleksibel. */
+  grid-auto-rows: minmax(150px, auto);
+  /* Tinggi minimum kartu 150px, bisa membesar sesuai isi. */
+  gap: 12px;
+  /* Jarak antar kartu. */
+  align-content: safe center;
+  /* Menengahkan grid secara vertikal; aman saat kartu lebih tinggi dari layar. */
+  justify-content: safe center;
+  /* Menengahkan grid secara horizontal; aman saat grid lebih lebar dari layar. */
+  animation: content-intro 800ms cubic-bezier(0.22, 1, 0.36, 1) 360ms both;
+  /* Animasi section CV muncul. */
 }
 
 /* Style dasar semua kartu CV. */
 .cv-card {
-  display: flex; /* Isi kartu ditata dengan flexbox. */
-  flex-direction: column; /* Ikon dan teks disusun vertikal. */
-  justify-content: space-between; /* Ikon dan teks diberi jarak atas-bawah. */
-  gap: 16px; /* Jarak antar elemen di dalam kartu. */
-  min-width: 0; /* Mencegah isi panjang memaksa grid melebar. */
-  padding: 18px; /* Ruang dalam kartu. */
-  border: 1px solid var(--line-color); /* Border halus mengikuti tema. */
-  border-radius: 8px; /* Sudut kartu konsisten. */
-  background: var(--panel-color); /* Warna background kartu mengikuti tema. */
-  box-sizing: border-box; /* Padding dan border dihitung dalam ukuran kartu. */
-  overflow: hidden; /* Isi yang terlalu besar tidak keluar dari sudut kartu. */
-  transition: transform 180ms ease, border-color 180ms ease, background-color 250ms ease; /* Animasi hover dan tema. */
+  display: flex;
+  /* Isi kartu ditata dengan flexbox. */
+  flex-direction: column;
+  /* Ikon dan teks disusun vertikal. */
+  justify-content: space-between;
+  /* Ikon dan teks diberi jarak atas-bawah. */
+  gap: 16px;
+  /* Jarak antar elemen di dalam kartu. */
+  min-width: 0;
+  /* Mencegah isi panjang memaksa grid melebar. */
+  padding: 18px;
+  /* Ruang dalam kartu. */
+  border: 1px solid var(--line-color);
+  /* Border halus mengikuti tema. */
+  border-radius: 8px;
+  /* Sudut kartu konsisten. */
+  background: color-mix(in srgb, color-mix(in srgb, var(--base-color) 90%, var(--text-color)) 85%, transparent);
+  /* Warna kartu semi-transparan dengan bias warna teks. */
+  backdrop-filter: blur(16px);
+  /* Efek blur kaca (glassmorphism). */
+  -webkit-backdrop-filter: blur(16px);
+  /* Dukungan Safari untuk blur kaca. */
+  box-sizing: border-box;
+  /* Padding dan border dihitung dalam ukuran kartu. */
+  overflow: hidden;
+  /* Isi yang terlalu besar tidak keluar dari sudut kartu. */
+  transition: transform 180ms ease, border-color 180ms ease, background-color 250ms ease, backdrop-filter 250ms ease;
+  /* Animasi hover dan tema. */
 }
 
 /* Efek hover untuk memberi feedback interaktif pada kartu. */
 .cv-card:hover {
-  transform: translateY(-3px); /* Kartu naik sedikit saat hover. */
-  border-color: var(--accent-color); /* Border berubah ke warna aksen. */
+  transform: translateY(-3px);
+  /* Kartu naik sedikit saat hover. */
+  border-color: var(--accent-solid);
+  /* Border berubah ke warna aksen padat. */
 }
 
 /* Ukuran ikon default di kartu CV. */
 .cv-card img {
-  width: 36px; /* Lebar ikon kartu. */
-  height: 36px; /* Tinggi ikon kartu. */
-  flex: 0 0 auto; /* Ikon tidak mengecil atau membesar karena flex. */
+  width: 36px;
+  /* Lebar ikon kartu. */
+  height: 36px;
+  /* Tinggi ikon kartu. */
+  flex: 0 0 auto;
+  /* Ikon tidak mengecil atau membesar karena flex. */
 }
 
 /* Style teks di kartu CV. */
 .cv-card p {
-  margin: 0; /* Menghapus margin bawaan paragraf. */
-  overflow-wrap: anywhere; /* Teks panjang seperti email boleh pecah agar tidak keluar kartu. */
-  line-height: 1.35; /* Jarak antar baris nyaman untuk kartu. */
-  font-size: 18px; /* Ukuran teks utama kartu. */
-  font-weight: 600; /* Teks dibuat cukup tebal agar mudah dipindai. */
+  margin: 0;
+  /* Menghapus margin bawaan paragraf. */
+  overflow-wrap: anywhere;
+  /* Teks panjang seperti email boleh pecah agar tidak keluar kartu. */
+  line-height: 1.35;
+  /* Jarak antar baris nyaman untuk kartu. */
+  font-size: 18px;
+  /* Ukuran teks utama kartu. */
+  font-weight: 600;
+  /* Teks dibuat cukup tebal agar mudah dipindai. */
 }
 
 /* Kartu profil dibuat lebih besar dari kartu lain. */
 .cv-card-profile {
-  grid-column: span 2; /* Kartu profil memakan dua kolom. */
-  grid-row: span 2; /* Kartu profil memakan dua baris. */
+  grid-column: span 2;
+  /* Kartu profil memakan dua kolom. */
+  grid-row: span 3;
+  /* Kartu profil memakan tiga baris. */
+  justify-content: flex-start;
+  /* Konten profil rapat di atas, tidak membentang penuh tinggi. */
 }
 
 /* Ikon kartu profil dibuat lebih besar. */
 .cv-card-profile img {
-  width: 72px; /* Lebar ikon profil. */
-  height: 72px; /* Tinggi ikon profil. */
+  width: 72px;
+  /* Lebar ikon profil. */
+  height: 72px;
+  /* Tinggi ikon profil. */
 }
 
 /* Nama pada kartu profil dibuat menonjol. */
 .cv-card-profile p {
-  font-size: 34px; /* Ukuran nama lebih besar dari kartu biasa. */
-  line-height: 1.08; /* Line-height rapat agar nama besar tetap compact. */
+  font-size: 34px;
+  /* Ukuran nama lebih besar dari kartu biasa. */
+  line-height: 1.08;
+  /* Line-height rapat agar nama besar tetap compact. */
 }
 
 /* Kartu alamat dibuat melebar karena teks alamat panjang. */
 .cv-card-address {
-  grid-column: span 2; /* Kartu alamat memakan dua kolom. */
+  grid-column: span 2;
+  /* Kartu alamat memakan dua kolom agar menyesuaikan dengan grid. */
 }
 
 /* Kartu software dibuat selebar grid. */
 .cv-card-software {
-  grid-column: span 4; /* Kartu software memakan empat kolom. */
+  grid-column: span 4;
+  /* Kartu software memakan empat kolom. */
 }
 
 /* Judul dalam kartu software sedikit lebih besar. */
-.cv-card-software > p {
-  font-size: 22px; /* Ukuran judul software. */
+.cv-card-software>p {
+  font-size: 22px;
+  /* Ukuran judul software. */
 }
 
 /* Wrapper daftar software. */
 .software-list {
-  display: flex; /* Chip software disusun dengan flexbox. */
-  flex-wrap: wrap; /* Chip boleh turun ke baris baru saat ruang sempit. */
-  gap: 8px; /* Jarak antar chip. */
+  display: flex;
+  /* Chip software disusun dengan flexbox. */
+  flex-wrap: wrap;
+  /* Chip boleh turun ke baris baru saat ruang sempit. */
+  margin: 0;
+  /* Menghapus margin bawaan list. */
+  padding: 0;
+  /* Menghapus padding bawaan list. */
+  gap: 8px;
+  /* Jarak antar chip. */
+  list-style: none;
+  /* Menghilangkan bullet bawaan list. */
 }
 
 /* Chip individual untuk nama software. */
-.software-list span {
-  padding: 8px 12px; /* Ruang dalam chip. */
-  border: 1px solid var(--line-color); /* Border chip mengikuti tema. */
-  border-radius: 999px; /* Membuat chip berbentuk pil. */
-  background: var(--base-color); /* Background chip mengikuti background halaman. */
-  font-size: 14px; /* Ukuran teks chip. */
-  font-weight: 700; /* Teks chip dibuat tebal agar terbaca sebagai label. */
-  line-height: 1; /* Tinggi baris chip dibuat ringkas. */
-  transition: background-color 250ms ease, border-color 250ms ease; /* Transisi halus saat tema berubah. */
+.software-list li {
+  padding: 8px 12px;
+  /* Ruang dalam chip. */
+  border: 1px solid var(--line-color);
+  /* Border chip mengikuti tema. */
+  border-radius: 999px;
+  /* Membuat chip berbentuk pil. */
+  background: var(--base-color);
+  /* Background chip mengikuti background halaman. */
+  font-size: 14px;
+  /* Ukuran teks chip. */
+  font-weight: 700;
+  /* Teks chip dibuat tebal agar terbaca sebagai label. */
+  line-height: 1;
+  /* Tinggi baris chip dibuat ringkas. */
+  transition: background-color 250ms ease, border-color 250ms ease;
+  /* Transisi halus saat tema berubah. */
 }
 
 /* Section cover letter dibuat seperti lembar surat. */
 .cl-content {
-  min-height: 100vh; /* Tinggi minimal satu layar penuh. */
-  display: flex; /* Memakai flexbox untuk susunan paragraf. */
-  flex-direction: column; /* Paragraf disusun dari atas ke bawah. */
-  justify-content: center; /* Isi surat ditempatkan di tengah vertikal. */
-  gap: 18px; /* Jarak antar paragraf. */
-  width: var(--content-width); /* Lebar section sama dengan section lain. */
-  margin: 0 auto; /* Menengahkan surat. */
-  padding: 96px 48px 104px; /* Ruang dalam surat plus ruang aman header/footer. */
-  border-inline: 1px solid var(--line-color); /* Garis kiri-kanan seperti batas kertas. */
-  background: /* Background dibuat berlapis: warna kertas dan garis halus. */
-    linear-gradient(var(--panel-color), var(--panel-color)) padding-box, /* Lapisan warna dasar surat. */
-    repeating-linear-gradient( /* Lapisan garis horizontal tipis seperti kertas bergaris. */
-      to bottom, /* Arah garis diulang dari atas ke bawah. */
-      transparent 0, /* Awal area transparan. */
-      transparent 31px, /* Area transparan sampai 31px. */
-      var(--line-color) 32px /* Garis muncul di titik 32px. */
+  display: flex;
+  /* Memakai flexbox untuk susunan paragraf. */
+  flex-direction: column;
+  /* Paragraf disusun dari atas ke bawah. */
+  align-items: center;
+  /* Menengahkan blok surat secara horizontal. */
+  justify-content: safe center;
+  /* Isi surat ditempatkan di tengah vertikal; aman saat teks lebih panjang dari layar. */
+  gap: 18px;
+  /* Jarak antar paragraf. */
+  padding-inline: 48px;
+  /* Ruang kiri-kanan seperti batas kertas. */
+  border-inline: 1px solid var(--line-color);
+  /* Garis kiri-kanan seperti batas kertas. */
+  background:
+    /* Background dibuat berlapis: warna kertas dan garis halus. */
+    linear-gradient(color-mix(in srgb, var(--base-color) 94%, var(--text-color)), color-mix(in srgb, var(--base-color) 94%, var(--text-color))) padding-box,
+    /* Lapisan warna dasar surat. */
+    repeating-linear-gradient(
+      /* Lapisan garis horizontal tipis seperti kertas bergaris. */
+      to bottom,
+      /* Arah garis diulang dari atas ke bawah. */
+      transparent 0,
+      /* Awal area transparan. */
+      transparent 31px,
+      /* Area transparan sampai 31px. */
+      var(--line-color) 32px
+      /* Garis muncul di titik 32px. */
     );
-  box-sizing: border-box; /* Padding dan border masuk ukuran total. */
-  animation: content-intro 800ms cubic-bezier(0.22, 1, 0.36, 1) 460ms both; /* Animasi section surat muncul. */
+  box-sizing: border-box;
+  /* Padding dan border masuk ukuran total. */
+  animation: content-intro 800ms cubic-bezier(0.22, 1, 0.36, 1) 460ms both;
+  /* Animasi section surat muncul. */
 }
 
 /* Animasi fade-in untuk halaman. */
 @keyframes page-fade-in {
   from {
-    opacity: 0; /* Awal animasi halaman transparan. */
+    opacity: 0;
+    /* Awal animasi halaman transparan. */
   }
 }
 
 /* Animasi header masuk dari atas. */
 @keyframes header-intro {
   from {
-    opacity: 0; /* Header mulai transparan. */
-    transform: translate(-50%, -18px); /* Header mulai sedikit di atas posisi final. */
+    opacity: 0;
+    /* Header mulai transparan. */
+    transform: translate(-50%, -18px);
+    /* Header mulai sedikit di atas posisi final. */
   }
+
   to {
-    opacity: 1; /* Header menjadi terlihat penuh. */
-    transform: translate(-50%, 0); /* Header kembali ke posisi tengah final. */
+    opacity: 1;
+    /* Header menjadi terlihat penuh. */
+    transform: translate(-50%, 0);
+    /* Header kembali ke posisi tengah final. */
   }
 }
 
 /* Animasi footer masuk dari bawah. */
 @keyframes footer-intro {
   from {
-    opacity: 0; /* Footer mulai transparan. */
-    transform: translateY(18px); /* Footer mulai sedikit di bawah posisi final. */
+    opacity: 0;
+    /* Footer mulai transparan. */
+    transform: translateY(18px);
+    /* Footer mulai sedikit di bawah posisi final. */
   }
+
   to {
-    opacity: 1; /* Footer menjadi terlihat penuh. */
-    transform: translateY(0); /* Footer kembali ke posisi final. */
+    opacity: 1;
+    /* Footer menjadi terlihat penuh. */
+    transform: translateY(0);
+    /* Footer kembali ke posisi final. */
   }
 }
 
 /* Animasi umum untuk section konten. */
 @keyframes content-intro {
   from {
-    opacity: 0; /* Konten mulai transparan. */
-    transform: translateY(18px); /* Konten mulai sedikit lebih bawah. */
+    opacity: 0;
+    /* Konten mulai transparan. */
+    transform: translateY(18px);
+    /* Konten mulai sedikit lebih bawah. */
   }
+
   to {
-    opacity: 1; /* Konten menjadi terlihat penuh. */
-    transform: translateY(0); /* Konten naik ke posisi final. */
+    opacity: 1;
+    /* Konten menjadi terlihat penuh. */
+    transform: translateY(0);
+    /* Konten naik ke posisi final. */
   }
 }
 
 /* Style paragraf di cover letter. */
 .cl-content p {
-  margin: 0; /* Menghapus margin bawaan paragraf. */
-  font-size: 18px; /* Ukuran teks surat di desktop. */
-  line-height: 1.75; /* Jarak antar baris nyaman untuk membaca surat. */
-  overflow-wrap: anywhere; /* Teks panjang boleh pecah agar tidak keluar layout. */
+  width: 100%;
+  /* Paragraf tetap memakai lebar penuh section meski parent ditengahkan. */
+  margin: 0;
+  /* Menghapus margin bawaan paragraf. */
+  font-size: 18px;
+  /* Ukuran teks surat di desktop. */
+  line-height: 1.75;
+  /* Jarak antar baris nyaman untuk membaca surat. */
+  overflow-wrap: anywhere;
+  /* Teks panjang boleh pecah agar tidak keluar layout. */
 }
 
 /* Paragraf pertama surat diberi penekanan. */
 .cl-content p:first-child {
-  margin-bottom: 10px; /* Memberi jarak tambahan setelah salam pembuka. */
-  font-weight: 700; /* Salam pembuka dibuat tebal. */
+  margin-bottom: 10px;
+  /* Memberi jarak tambahan setelah salam pembuka. */
+  font-weight: 700;
+  /* Salam pembuka dibuat tebal. */
 }
 
 /* Paragraf terakhir surat diberi jarak atas ekstra sebagai penutup. */
 .cl-content p:last-child {
-  margin-top: 10px; /* Memberi ruang sebelum paragraf penutup. */
+  margin-top: 10px;
+  /* Memberi ruang sebelum paragraf penutup. */
 }
 
 /* Breakpoint tablet untuk Bento Grid. */
 @media (max-width: 820px) {
   .cv-content {
-    grid-template-columns: repeat(2, minmax(0, 1fr)); /* Grid CV berubah dari 4 kolom menjadi 2 kolom. */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    /* Grid CV berubah dari 4 kolom menjadi 2 kolom. */
   }
 
   .cv-card-profile,
   .cv-card-address,
   .cv-card-software {
-    grid-column: span 2; /* Kartu lebar tetap memenuhi dua kolom tablet. */
+    grid-column: span 2;
+    /* Kartu lebar tetap memenuhi dua kolom tablet. */
   }
 }
 
 /* Breakpoint mobile untuk layar kecil. */
 @media (max-width: 560px) {
   :root {
-    --content-width: min(100% - 24px, 420px); /* Lebar konten mobile diberi margin 24px dan batas 420px. */
+    --content-width: min(100% - 24px, 420px);
+    /* Lebar konten mobile diberi margin 24px dan batas 420px. */
   }
 
   .cv-content {
-    grid-template-columns: 1fr; /* Grid CV menjadi satu kolom di mobile. */
-    gap: 10px; /* Jarak kartu sedikit dikurangi. */
+    grid-template-columns: 1fr;
+    /* Grid CV menjadi satu kolom di mobile. */
+    gap: 10px;
+    /* Jarak kartu sedikit dikurangi. */
   }
 
   .cv-card,
   .cv-card-profile,
   .cv-card-address,
   .cv-card-software {
-    grid-column: span 1; /* Semua kartu hanya memakai satu kolom di mobile. */
+    grid-column: span 1;
+    /* Semua kartu hanya memakai satu kolom di mobile. */
   }
 
   .cv-card-profile p {
-    font-size: 28px; /* Nama profil diperkecil agar muat di layar mobile. */
+    font-size: 28px;
+    /* Nama profil diperkecil agar muat di layar mobile. */
   }
 
   .floating-header {
-    width: calc(100% - 16px); /* Header diberi lebar hampir penuh dengan margin 8px kiri-kanan. */
+    width: calc(100% - 16px);
+    /* Header diberi lebar hampir penuh dengan margin 8px kiri-kanan. */
   }
 
   .menu {
-    padding-inline: 16px; /* Padding kiri-kanan menu dikurangi di mobile. */
+    padding-inline: 16px;
+    /* Padding kiri-kanan menu dikurangi di mobile. */
   }
 
   .cl-content {
-    padding: 88px 20px 96px; /* Padding surat diperkecil agar area baca mobile lebih luas. */
-    border-inline: 0; /* Border kiri-kanan dihapus agar mobile terasa lega. */
+    padding-inline: 20px;
+    /* Padding kiri-kanan surat diperkecil agar area baca mobile lebih luas. */
+    border-inline: 0;
+    /* Border kiri-kanan dihapus agar mobile terasa lega. */
   }
 
   .cl-content p {
-    font-size: 16px; /* Teks surat diperkecil di mobile. */
-    line-height: 1.65; /* Line-height mobile tetap nyaman tapi lebih hemat ruang. */
+    font-size: 16px;
+    /* Teks surat diperkecil di mobile. */
+    line-height: 1.65;
+    /* Line-height mobile tetap nyaman tapi lebih hemat ruang. */
+  }
+
+  .video-modal {
+    padding: 16px;
+    /* Ruang tepi modal diperkecil di layar kecil. */
+  }
+
+  .video-modal-panel {
+    width: min(100%, 1440px);
+    /* Panel memakai lebar layar mobile dengan ruang dari padding modal. */
+    max-height: 82vh;
+    /* Menjaga tombol close tetap mudah dijangkau. */
+  }
+
+  .video-modal-close {
+    top: -12px;
+    /* Tombol close tidak terlalu jauh keluar panel di mobile. */
+    right: -12px;
+    /* Tombol close tetap terlihat di mobile. */
   }
 }
 
 /* Menghormati user yang memilih reduced motion di sistem operasi/browser. */
 @media (prefers-reduced-motion: reduce) {
   html {
-    scroll-behavior: auto; /* Smooth scroll dimatikan untuk user sensitif motion. */
+    scroll-behavior: auto;
+    /* Smooth scroll dimatikan untuk user sensitif motion. */
   }
 
   body,
@@ -535,6 +1275,16 @@ html {
   .video-content,
   .cv-content,
   .cl-content {
-    animation: none; /* Semua animasi intro dimatikan. */
+    animation: none;
+    /* Semua animasi intro dimatikan. */
+  }
+
+  .video-open,
+  .video-open span,
+  .video-modal-backdrop,
+  .video-modal-panel,
+  .video-modal-close {
+    transition: none;
+    /* Transisi modal dimatikan untuk reduced motion. */
   }
 }
