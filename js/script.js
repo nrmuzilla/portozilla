@@ -4,16 +4,33 @@ const demoReel = document.querySelector(".demo-reel");
 const demoVideo = demoReel?.querySelector("video");
 const demoClose = demoReel?.querySelector(".demo-reel-close");
 
-document.body.dataset.theme ||= "light";
+const getSavedTheme = () => localStorage.getItem("theme");
+const setTheme = (theme) => {
+    document.body.dataset.theme = theme;
+    localStorage.setItem("theme", theme);
+    themeSwitch?.setAttribute(
+        "aria-label",
+        `Ganti ke tema ${theme === "dark" ? "terang" : "gelap"}`
+    );
+};
 
-demoReel?.addEventListener("click", () => {
+setTheme(getSavedTheme() || "light");
+
+if (demoVideo) demoVideo.controls = false;
+
+demoReel?.addEventListener("click", (e) => {
+    if (e.target.closest(".demo-reel-close")) return;
+    if (demoReel.classList.contains("is-expanded")) return;
+
     demoReel.classList.add("is-expanded");
+    if (demoVideo) demoVideo.controls = true;
     demoVideo?.play();
 });
 
 demoClose?.addEventListener("click", (e) => {
     e.stopPropagation();
     demoReel.classList.remove("is-expanded");
+    if (demoVideo) demoVideo.controls = false;
     demoVideo?.pause();
 });
 
@@ -29,11 +46,7 @@ themeSwitch?.addEventListener("click", () => {
     const isDark = document.body.dataset.theme === "dark";
     const nextTheme = isDark ? "light" : "dark";
 
-    document.body.dataset.theme = nextTheme;
-    themeSwitch.setAttribute(
-        "aria-label",
-        `Ganti ke tema ${nextTheme === "dark" ? "terang" : "gelap"}`
-    );
+    setTheme(nextTheme);
 });
 
 themeSwitch?.addEventListener("keydown", (e) => {
@@ -71,7 +84,7 @@ const setupPageTransitions = () => {
                     window.location.href = href;
                 }, 250);
             }
-        } catch (err) {
+        } catch {
         }
     });
 
